@@ -11,7 +11,9 @@ dependencies, works anywhere.
 Agency/
 ├── index.html          # all page content (single-page site with anchor sections)
 ├── css/style.css        # dark/bold theme, responsive layout, animations
+├── css/chatbot.css       # chat widget styles (launcher, panel, bubbles)
 ├── js/main.js            # mobile nav, scroll reveal, back-to-top, contact form
+├── js/chatbot.js          # rule-based service assistant (see below)
 ├── assets/favicon.svg    # placeholder logo/favicon mark
 └── README.md
 ```
@@ -56,6 +58,25 @@ To upgrade later without much work, swap the `fetch`/submit logic in `js/main.js
 form service such as [Formspree](https://formspree.io), [Getform](https://getform.io), or (if
 you switch hosting to Netlify) native **Netlify Forms** — just add `data-netlify="true"` to the
 `<form>` tag.
+
+## Chat widget (rule-based assistant)
+
+Bottom-right chat launcher → opens a panel with a greeting and quick-reply buttons for all 6
+service categories. No backend, no API calls, no cost — it's pure keyword matching in
+`js/chatbot.js` against a `SERVICES` catalog that mirrors the page content.
+
+- **Ambiguous input** ("what services do you offer", or anything it can't match) → lists all
+  categories with their full sub-service lists.
+- **Specific input** (a button click, or typed text like "shopify", "chatbot", "aws") → jumps
+  straight to that category's detail: description, sub-services, starting price.
+- **"Get a quote for this"** closes the chat, pre-fills the existing contact form's service
+  dropdown, scrolls to it, and focuses the name field — no separate lead-capture flow to maintain.
+- **"View full section on page"** scrolls to and briefly highlights the matching section already
+  built on the page.
+
+To update what the bot knows (new services, changed pricing, more keywords), edit the
+`SERVICES` array at the top of `js/chatbot.js` — everything else (matching, rendering, the quote
+hand-off) works off that data, so you don't need to touch the matching logic itself.
 
 ## Deploying to GitHub Pages
 

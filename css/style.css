@@ -410,7 +410,7 @@ p{ margin: 0 0 1em; color: var(--text-dim); }
 .back-to-top{
   position: fixed;
   right: 24px;
-  bottom: 24px;
+  bottom: 100px;
   width: 44px; height: 44px;
   border-radius: 50%;
   background: var(--accent-grad);
